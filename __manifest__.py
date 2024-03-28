@@ -7,6 +7,7 @@
         'security/ir.model.access.csv',
         'wizard/add_rejection_Reson.xml',
         'views/technical_order.xml',
+        'views/stock_picking_view.xml',
         'views/account_move_view.xml',
         'views/sale_order_view.xml',
         'views/customer_view.xml',

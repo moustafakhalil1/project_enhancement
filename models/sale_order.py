@@ -4,20 +4,15 @@ class SaleOrderLineinherit(models.Model):
     _inherit='sale.order'
     technical_order=fields.Many2one('technical.order')
 
-    def create_transfer(self):
+    def action_confirm(self):
+        res = super().action_confirm()
         for order in self:
             for line in order.order_line:
-                self.env['stock.move'].create({
-                    'size': line.size,
-                    'name':line.name,
-                    'product_id':line.product_id.id,
-                    'product_uom':1,
-                    'price_unit':line.price_unit,
-                    'product_uom_qty':line.product_uom_qty,
-                    'location_id':1,
-                    'location_dest_id':1,
-                    'procure_method':'make_to_stock'
-                })
+                for move in line.move_ids:
+                    move.write({
+                        'size': line.size
+                    })
+        return res
 
 
 
