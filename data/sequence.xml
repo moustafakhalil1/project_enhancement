@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="seq_technical_order" model="ir.sequence">
+        <field name="name">Technical Order</field>
+        <field name="code">seq.technical.order</field>
+        <field name="prefix">TO</field>
+        <field name="padding">4</field>
+    </record>
+</odoo>
