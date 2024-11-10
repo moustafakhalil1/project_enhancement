@@ -1,0 +1,78 @@
+<odoo>
+    <!-- Inherit Project Form View -->
+    <data>
+        <record id="view_project_form_inherit" model="ir.ui.view">
+            <field name="name">project.project.form.inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.project_project_view_form_simplified_footer"/>
+            <field name="arch" type="xml">
+                <!-- Add custom fields in the form -->
+
+
+                <xpath expr="//field[@name='name']" position="after">
+                    <div>
+                        <br></br>
+                    </div>
+                    <group string="Odoo Information">
+                        <field name="odoo_version"/>
+                        <field name="odoo_type"/>
+                        <field name="github_repo_name"/>
+                        <field name="github_repo_url"/>
+                    </group>
+                    <group string="Hosting Details">
+                        <field name="hosting"/>
+                        <field name="hosting_description"/>
+                    </group>
+                    <field name="collaborator_ids">
+                        <tree editable="bottom" decoration-success="status == 'active'"
+                              decoration-danger="status=='inactive'">
+                            <field name="employee_id"/>
+                            <field name="status"/>
+                            <button name="toggle_status" type="object" string="Activate"
+                                    attrs="{'invisible': [('status', '=', 'active')]}"/>
+                            <button name="toggle_status" type="object" string="Deactivate"
+                                    attrs="{'invisible': [('status', '=', 'inactive')]}"/>
+                        </tree>
+                    </field>
+                </xpath>
+            </field>
+        </record>
+        <record id="project_form_inherit" model="ir.ui.view">
+            <field name="name">project.project.form.inherit</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group[field[@name='company_id']]" position="after">
+                    <group string="Odoo information">
+
+                        <field name="odoo_version"/>
+                        <field name="odoo_type" colspan="2"/>
+                        <field name="github_repo_name" colspan="2"/>
+                        <field name="github_repo_url" colspan="2"/>
+                        <field name="hosting" colspan="2"/>
+                        <field name="hosting_description" colspan="2"/>
+                    </group>
+
+
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Collaborators">
+                        <field name="collaborator_ids">
+                            <tree editable="bottom" decoration-success="status == 'active'"
+                                  decoration-danger="status=='inactive'">
+                                <field name="employee_id"/>
+                                <field name="status"/>
+                                <!-- Button to toggle status -->
+                                <button name="toggle_status" type="object" string="Activate"
+                                        attrs="{'invisible': [('status', '=', 'active')]}"/>
+                                <button name="toggle_status" type="object" string="Deactivate"
+                                        attrs="{'invisible': [('status', '=', 'inactive')]}"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

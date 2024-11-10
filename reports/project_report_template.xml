@@ -1,38 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
+        <record id="action_project_report" model="ir.actions.report">
+            <field name="name">Project Report</field>
+            <field name="model">project.project</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">project_enhancement.project_report_template</field>
+            <field name="report_file">project_enhancement.project_report_template</field>
+            <field name="binding_model_id" ref="model_project_project"/>
+            <field name="binding_type">report</field>
+        </record>
+
+        <record id="project_project_action" model="ir.actions.act_window">
+            <field name="name">Projects</field>
+            <field name="res_model">project.project</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'default_model': 'project.project'}</field>
+            <field name="domain">[]</field>
+            <field name="type">ir.actions.act_window</field>
+        </record>
+
         <template id="project_report_template">
-            <t t-call="web.external_layout">
-                <div class="page">
-                    <h2>Project Report</h2>
-                    <p>Project Name:
-                        <t t-esc="doc.name"/>
-                    </p>
-                    <p>GitHub Repo Name:
-                        <t t-esc="doc.github_repo_name"/>
-                    </p>
-                    <p>GitHub Repo URL:
-                        <a t-att-href="doc.github_repo_url">
-                            <t t-esc="doc.github_repo_url"/>
-                        </a>
-                    </p>
-                    <p>Odoo Version:
-                        <t t-esc="doc.odoo_version"/>
-                    </p>
-                    <p>Odoo Type:
-                        <t t-esc="doc.odoo_type"/>
-                    </p>
-                    <p>Hosting:
-                        <t t-esc="doc.hosting"/>
-                    </p>
-                    <h3>Collaborators:</h3>
-                    <ul>
-                        <li t-foreach="doc.collaborator_ids" t-as="collaborator">
-                            <t t-esc="collaborator.employee_id.name"/>
-                        </li>
-                    </ul>
-                </div>
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <h2 class="report-title">Project Report</h2>
+
+                            <!-- Project Details Section -->
+                            <div class="report-section">
+                                <p class="report-detail">
+                                    <strong class="report-label">Project Name:</strong>
+                                    <span class="report-value">
+                                        <t t-esc="doc.name"/>
+                                    </span>
+                                </p>
+                                <p class="report-detail">
+                                    <strong class="report-label">GitHub Repo Name:</strong>
+                                    <span class="report-value">
+                                        <t t-esc="doc.github_repo_name"/>
+                                    </span>
+                                </p>
+                                <p class="report-detail">
+                                    <strong class="report-label">Project Date:</strong>
+                                    <span class="report-value">
+                                        <t t-esc="doc.date_start"/>
+                                    </span>
+                                </p>
+                                <p class="report-detail">
+                                    <strong class="report-label">GitHub Repo URL:</strong>
+                                    <a t-att-href="doc.github_repo_url" class="report-link">
+                                        <t t-esc="doc.github_repo_url"/>
+                                    </a>
+                                </p>
+                                <p class="report-detail">
+                                    <strong class="report-label">Odoo Version:</strong>
+                                    <span class="report-value">
+                                        <t t-esc="doc.odoo_version"/>
+                                    </span>
+                                </p>
+                                <p class="report-detail">
+                                    <strong class="report-label">Odoo Type:</strong>
+                                    <span class="report-value">
+                                        <t t-esc="doc.odoo_type"/>
+                                    </span>
+                                </p>
+                                <p class="report-detail">
+                                    <strong class="report-label">Hosting:</strong>
+                                    <span class="report-value">
+                                        <t t-esc="doc.hosting"/>
+                                    </span>
+                                </p>
+                            </div>
+
+                            <!-- Collaborators Section -->
+                            <div class="report-section">
+                                <h3 class="collaborator-title">Collaborators:</h3>
+                                <ul class="collaborator-list">
+                                    <li t-foreach="doc.collaborator_ids" t-as="collaborator">
+                                        <span class="collaborator-name">
+                                            <t t-esc="collaborator.employee_id.name"/>
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </t>
+                </t>
             </t>
         </template>
+
+
     </data>
+
 </odoo>

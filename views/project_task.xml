@@ -1,0 +1,40 @@
+<odoo>
+    <data>
+        <record id="view_task_form_inherit" model="ir.ui.view">
+            <field name="name">project.task.form.inherit</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+
+
+                <xpath expr="//notebook" position="before">
+                    <div class="oe_structure"/>
+                    <div class="row">
+                        <div class="col-6">
+                            <group string="Task Details">
+                                <field name="task_number" readonly="1"/>
+                                <field name="developer_id"/>
+                                <field name="functional_consultant_id"/>
+                                <field name="development_status"/>
+                                <field name="module"/>
+                                <field name="branch"/>
+                                <field name="release_notes"/>
+                                <field name="custom_priority"/>
+                                <field name="internal_deadline"/>
+                            </group>
+                        </div>
+                        <div class="col-6">
+                            <group string="Allocated Times">
+                                <field name="research_solution_time" widget="float_time"/>
+                                <field name="development_time" widget="float_time"/>
+                                <field name="testing_time" widget="float_time"/>
+                                <field name="allocated_time" readonly="1"/>
+                            </group>
+                        </div>
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>
