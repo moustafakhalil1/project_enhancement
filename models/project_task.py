@@ -61,6 +61,7 @@ class TechnicalOrder(models.Model):
                 subtype_id=self.env.ref('mail.mt_note').id,  # Use subtype 'Note'
             )
         return True
+    
 
     def action_cancle(self):
         self.state = 'cancel'

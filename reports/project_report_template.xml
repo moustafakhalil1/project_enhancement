@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="project_report_template">
+            <t t-call="web.external_layout">
+                <div class="page">
+                    <h2>Project Report</h2>
+                    <p>Project Name:
+                        <t t-esc="doc.name"/>
+                    </p>
+                    <p>GitHub Repo Name:
+                        <t t-esc="doc.github_repo_name"/>
+                    </p>
+                    <p>GitHub Repo URL:
+                        <a t-att-href="doc.github_repo_url">
+                            <t t-esc="doc.github_repo_url"/>
+                        </a>
+                    </p>
+                    <p>Odoo Version:
+                        <t t-esc="doc.odoo_version"/>
+                    </p>
+                    <p>Odoo Type:
+                        <t t-esc="doc.odoo_type"/>
+                    </p>
+                    <p>Hosting:
+                        <t t-esc="doc.hosting"/>
+                    </p>
+                    <h3>Collaborators:</h3>
+                    <ul>
+                        <li t-foreach="doc.collaborator_ids" t-as="collaborator">
+                            <t t-esc="collaborator.employee_id.name"/>
+                        </li>
+                    </ul>
+                </div>
+            </t>
+        </template>
+    </data>
+</odoo>

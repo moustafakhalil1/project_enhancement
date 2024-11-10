@@ -1,0 +1,18 @@
+<odoo>
+    <data>
+        <record id="view_project_collaborator_tree" model="ir.ui.view">
+            <field name="name">project.collaborator.tree</field>
+            <field name="model">project.collaborator</field>
+            <field name="arch" type="xml">
+                <tree decoration-info="status == 'active'" decoration-danger="status == 'inactive'">
+                    <field name="employee_id"/>
+                    <field name="status"/>
+                    <button name="toggle_status" type="object" string="Activate"
+                            attrs="{'invisible': [('status', '=', 'active')]}"/>
+                    <button name="toggle_status" type="object" string="Deactivate"
+                            attrs="{'invisible': [('status', '=', 'inactive')]}"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>
